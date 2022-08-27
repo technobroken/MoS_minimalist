@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Prefabs/GUI/Tools/PauseMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/GUI/GamePlayPauseMenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/GUI/GamePlayPauseMenu.gd" type="Script" id=3]
+
+[node name="GamePlayPauseMenu" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+ActionName = "PAUSE"
+
+[node name="ColorRect" type="ColorRect" parent="." index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.12549, 0.12549, 0.12549, 0.478431 )
+
+[node name="CenterContainer" type="CenterContainer" parent="." index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" index="0"]
+margin_left = 569.0
+margin_top = 324.0
+margin_right = 711.0
+margin_bottom = 476.0
+
+[node name="ResumeButton" parent="CenterContainer/VBoxContainer" index="0" instance=ExtResource( 2 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 142.0
+margin_bottom = 48.0
+
+[node name="Label" parent="CenterContainer/VBoxContainer/ResumeButton" index="0"]
+text = "Continuar"
+
+[node name="SaveButton" parent="CenterContainer/VBoxContainer" index="1" instance=ExtResource( 2 )]
+margin_left = 0.0
+margin_top = 52.0
+margin_right = 142.0
+margin_bottom = 100.0
+
+[node name="Label" parent="CenterContainer/VBoxContainer/SaveButton" index="0"]
+text = "Guardar..."
+
+[node name="ExitButton" parent="CenterContainer/VBoxContainer" index="2" instance=ExtResource( 2 )]
+margin_left = 0.0
+margin_top = 104.0
+margin_right = 142.0
+margin_bottom = 152.0
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
+
+[editable path="CenterContainer/VBoxContainer/ResumeButton"]
+[editable path="CenterContainer/VBoxContainer/SaveButton"]
+[editable path="CenterContainer/VBoxContainer/ExitButton"]

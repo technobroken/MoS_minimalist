@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Prefabs/GUI/PanelBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Textures/GUI/ButtonMinus.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Textures/GUI/ButtonPlus.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Textures/GUI/ButtonZero.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/GUI/PanelAttack.gd" type="Script" id=5]
+
+[node name="PanelAttack" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+
+[node name="VBoxContainer" parent="CenterContainer" index="0"]
+margin_top = 200.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 450, 400 )
+
+[node name="Center" parent="CenterContainer/VBoxContainer" index="1"]
+margin_bottom = 400.0
+
+[node name="CenterContainer" parent="CenterContainer/VBoxContainer/Center" index="0"]
+margin_bottom = 336.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Center/CenterContainer" index="0"]
+margin_left = 188.0
+margin_top = 66.0
+margin_right = 262.0
+margin_bottom = 270.0
+custom_constants/separation = 20
+
+[node name="TroopRows" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Center/CenterContainer/HBoxContainer" index="0"]
+margin_bottom = 204.0
+
+[node name="Buttons" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Center/CenterContainer/HBoxContainer" index="1"]
+margin_left = 20.0
+margin_right = 74.0
+margin_bottom = 204.0
+
+[node name="ButtonPlus" type="TextureButton" parent="CenterContainer/VBoxContainer/Center/CenterContainer/HBoxContainer/Buttons" index="0"]
+margin_right = 54.0
+margin_bottom = 48.0
+texture_normal = ExtResource( 3 )
+
+[node name="ButtonMinus" type="TextureButton" parent="CenterContainer/VBoxContainer/Center/CenterContainer/HBoxContainer/Buttons" index="1"]
+margin_top = 52.0
+margin_right = 54.0
+margin_bottom = 100.0
+texture_normal = ExtResource( 2 )
+
+[node name="ButtonZero" type="TextureButton" parent="CenterContainer/VBoxContainer/Center/CenterContainer/HBoxContainer/Buttons" index="2"]
+margin_top = 104.0
+margin_right = 54.0
+margin_bottom = 152.0
+texture_normal = ExtResource( 4 )
+
+[node name="AttackButton" type="TextureButton" parent="CenterContainer/VBoxContainer/Center/CenterContainer/HBoxContainer/Buttons" index="3"]
+margin_top = 156.0
+margin_right = 54.0
+margin_bottom = 204.0
+texture_normal = ExtResource( 4 )
+
+[connection signal="visibility_changed" from="." to="." method="_on_PanelAttack_visibility_changed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Center/CenterContainer/HBoxContainer/Buttons/ButtonPlus" to="." method="_on_ButtonPlus_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Center/CenterContainer/HBoxContainer/Buttons/AttackButton" to="." method="_on_AttackButton_pressed"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Prefabs/GUI/TopBarResource.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/GUI/RawMaterialsTopBar.gd" type="Script" id=3]
+
+[node name="RawMaterialsTopBar" type="HBoxContainer"]
+margin_right = 952.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+custom_constants/separation = 6
+script = ExtResource( 3 )
+
+[node name="TopBarResourceFood" parent="." instance=ExtResource( 2 )]
+
+[node name="TopBarResourceWood" parent="." instance=ExtResource( 2 )]
+margin_left = 148.0
+margin_right = 290.0
+RawMaterial = 1
+
+[node name="TopBarResourceSton" parent="." instance=ExtResource( 2 )]
+margin_left = 296.0
+margin_right = 438.0
+RawMaterial = 2
+
+[node name="TopBarResourceIron" parent="." instance=ExtResource( 2 )]
+margin_left = 444.0
+margin_right = 586.0
+RawMaterial = 3
