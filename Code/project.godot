@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Level.gd"
 }, {
+"base": "Level",
+"class": "Level00",
+"language": "GDScript",
+"path": "res://Scripts/Levels/Level00.gd"
+}, {
 "base": "Reference",
 "class": "LevelObj",
 "language": "GDScript",
@@ -159,6 +164,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/GUI/RawMaterialsTopBar.gd"
 }, {
+"base": "Node2D",
+"class": "StayingTroops",
+"language": "GDScript",
+"path": "res://Scripts/StayingTroops.gd"
+}, {
 "base": "Control",
 "class": "TopBar",
 "language": "GDScript",
@@ -194,6 +204,7 @@ _global_script_class_icons={
 "HumanCityObj": "",
 "IntroScene": "",
 "Level": "",
+"Level00": "",
 "LevelObj": "",
 "NpcCity": "",
 "NpcCityObj": "",
@@ -210,6 +221,7 @@ _global_script_class_icons={
 "ProductionButton": "",
 "RawMaterials": "",
 "RawMaterialsTopBar": "",
+"StayingTroops": "",
 "TopBar": "",
 "TopBarResource": "",
 "TravelingTroops": "",
@@ -224,6 +236,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+NodeTools="*res://Scripts/Globals/NodeTools.gd"
 Enums="*res://Scripts/Globals/Enums.gd"
 Globals="*res://Scripts/Globals/Globals.gd"
 

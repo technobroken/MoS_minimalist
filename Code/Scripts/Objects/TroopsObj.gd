@@ -15,6 +15,9 @@ func remove_troop(troop_key:String,amount:int)->void:
 func zero(troop_key:String)->void:
 	_amounts[troop_key]=0
 
+func get_troop_keys()->Array:
+	return _amounts.keys()
+
 func get_defense_points()->float:
 	return _get_points("defense")
 
@@ -35,7 +38,7 @@ func defeat()->void:
 
 func apply_bajas(factor:float)->void:
 	for troop_key in _amounts:
-		_amounts[troop_key]=factor*int(_amounts[troop_key])
+		_amounts[troop_key]=int(round(factor*int(_amounts[troop_key])))
 
 func apply_altas(troops:TroopsObj)->void:
 	for troop_key in troops._amounts:
@@ -43,3 +46,6 @@ func apply_altas(troops:TroopsObj)->void:
 
 func _init(troop_amounts:Dictionary)->void:
 	_amounts=troop_amounts
+
+func _to_string()->String:
+	return str(_amounts)

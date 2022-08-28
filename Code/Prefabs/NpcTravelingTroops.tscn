@@ -5,3 +5,6 @@
 [node name="NpcTravelingTroops" instance=ExtResource( 1 )]
 collision_layer = 8
 collision_mask = 1
+
+[node name="Sprite" parent="." index="0"]
+self_modulate = Color( 1, 0.403922, 0.32549, 1 )

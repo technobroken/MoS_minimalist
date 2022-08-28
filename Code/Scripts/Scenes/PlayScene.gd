@@ -16,13 +16,13 @@ var _npc_city_selected:NpcCity
 func _ready()->void:
 	_TopBar.connect("sig_menu_button_pressed",self,"_sig_menu_button_pressed")
 	_TopBar.connect("sig_city_action",self,"_sig_city_action")
-	_PanelAttack.connect("sig_throw_attack",self,"_sig_throw_attack")
 	_Menu.connect("sig_closed",self,"_sig_pause_menu_closed")
 #	if not Globals._game.level_path.empty():
 #		var level_prefab:=load(Globals._game.level_path) as PackedScene
 #		_Level=level_prefab.instance()
 #		_LevelContainer.add_child(_Level)
 	_Level.connect("sig_city_selected",self,"_sig_city_selected")
+	_Level.connect("sig_throw_attack",self,"_sig_throw_attack")
 	_sig_city_selected(_Level.get_human_city())
 
 func _sig_pause_menu_closed(action:int,params:={})->void:
@@ -58,7 +58,11 @@ func _sig_city_action(action:int)->void:
 		TopBar.EActions.ATTACK_CITY_ACTION:
 			_PanelAttack.show()
 
-func _sig_throw_attack(troops_obj:TroopsObj)->void:
-	var attack:=HUMAN_ATTACK_PREFAB.instance() as TravelingTroops
-	attack.init(_human_city_selected,_npc_city_selected,troops_obj)
+func _sig_throw_attack(source_city:City,target_city:City,troops_obj:TroopsObj)->void:
+	var attack:TravelingTroops
+	if source_city is HumanCity:
+		attack=HUMAN_ATTACK_PREFAB.instance() as TravelingTroops
+	elif source_city is NpcCity:
+		attack=NPC_ATTACK_PREFAB.instance() as TravelingTroops
+	attack.init(source_city,target_city,troops_obj)
 	_LevelContainer.add_child(attack)

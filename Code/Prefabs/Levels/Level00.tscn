@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Prefabs/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/NpcCity.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/HumanCity.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Textures/tiles_sheet.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Levels/Level00.gd" type="Script" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tiles_sheet.png 0"
@@ -848,6 +849,7 @@
 59/z_index = 0
 
 [node name="Level00" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
 
 [node name="Map" type="Node2D" parent="." index="0"]
 position = Vector2( 0, -64 )

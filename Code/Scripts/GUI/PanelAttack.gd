@@ -1,7 +1,6 @@
 extends PanelBase
 class_name PanelAttack
 
-signal sig_throw_attack()
 const ROW_PREFAB:=preload("res://Prefabs/GUI/PanelAttackTroopRow.tscn")
 onready var _Rows:=$CenterContainer/VBoxContainer/Center/CenterContainer/HBoxContainer/TroopRows as Control
 var _source_city:City
@@ -50,10 +49,10 @@ func _on_AttackButton_pressed()->void:
 	var troop_amounts:={}
 	for i in _Rows.get_child_count():
 		var row:=_Rows.get_child(i) as PanelAttackTroopRow
-		var troop_key:=row.TroopKey
 		var amount:=row.get_amount()
-		troop_amounts[troop_key]=amount
-		_source_city.remove_troops(row.TroopKey,amount)
-	.close(PanelBase.ACTION_CLOSE_PANEL)
-	var troops:=TroopsObj.new(troop_amounts)
-	emit_signal("sig_throw_attack",troops)
+		if amount>0:
+			troop_amounts[row.TroopKey]=amount
+	if troop_amounts.size()>0:
+		.close(PanelBase.ACTION_CLOSE_PANEL)
+		var troops:=TroopsObj.new(troop_amounts)
+		_source_city.attack_to(_target_city,troops)

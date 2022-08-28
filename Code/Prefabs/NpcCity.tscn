@@ -9,3 +9,9 @@ script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
 self_modulate = Color( 1, 0.403922, 0.32549, 1 )
+
+[node name="Timer" type="Timer" parent="." index="4"]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
