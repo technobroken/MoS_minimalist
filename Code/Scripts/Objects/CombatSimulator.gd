@@ -10,11 +10,13 @@ static func simulate_combat(attack_troops_obj:TroopsObj,target_city:City)->void:
 	#comparar resultados
 	var diference:=attack-defense
 	if diference>0:
-		#defensa no ha soportado el ataque
-		target_city.apply_damage(0)
+	#defensa no ha soportado el ataque
+		target_city.apply_troops_damage(0)
 		#calular las bajas en el ataque
 		var factor:=abs(diference)/attack
 		attack_troops_obj.apply_bajas(factor)
+		#aplicar el daño en la ciudad target
+		target_city.apply_city_damage(attack_troops_obj.get_attack_points())
 	else:
 		#defensa ha soportado el ataque->todas las tropas de ataque mueren
 		attack_troops_obj.defeat()

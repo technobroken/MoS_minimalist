@@ -115,6 +115,11 @@ _global_script_classes=[ {
 "path": "res://Prefabs/GUI/PanelBase.gd"
 }, {
 "base": "PanelBase",
+"class": "PanelEndGame",
+"language": "GDScript",
+"path": "res://Scripts/GUI/PanelEndGame.gd"
+}, {
+"base": "PanelBase",
 "class": "PanelProduction",
 "language": "GDScript",
 "path": "res://Scripts/GUI/PanelProduction.gd"
@@ -211,6 +216,7 @@ _global_script_class_icons={
 "PanelAttack": "",
 "PanelAttackTroopRow": "",
 "PanelBase": "",
+"PanelEndGame": "",
 "PanelProduction": "",
 "PanelProductionButton": "",
 "PanelProductionRow": "",

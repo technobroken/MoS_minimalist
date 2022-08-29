@@ -3,9 +3,12 @@ class_name City
 
 signal sig_pressed()
 signal sig_throw_attack()
+signal sig_defeated()
 const STAYING_TROOP_PREFAB:=preload("res://Prefabs/StayingTroops.tscn")
 export var TribeKey:String
 onready var _Troops:=$Troops as Node2D
+onready var _Life:=$Life as Label
+var _life:int=100
 var _city_obj:CityObj
 var _time_count:float
 
@@ -34,11 +37,18 @@ func attack_to(target_city:City,troops_obj:TroopsObj)->void:
 		remove_troops(troop_key,amount)
 	emit_signal("sig_throw_attack",self,target_city,troops_obj)
 
-func apply_damage(factor:float)->void:
+func apply_troops_damage(factor:float)->void:
 	_city_obj._troops.apply_bajas(factor)
 	_fill_troops_node(_city_obj._troops)
 
+func apply_city_damage(attack_points:int)->void:
+	_life=max(0,_life-attack_points/10)
+	_Life.text=str(_life)
+	if _life==0:
+		emit_signal("sig_defeated",self)
+
 func _ready()->void:
+	_Life.text=str(_life)
 	_time_count=0
 
 func _process(delta:float)->void:

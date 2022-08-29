@@ -10,6 +10,7 @@ onready var _Level:=$LevelContainer/Level00 as Level
 onready var _PanelProduction:=$HUD/PanelProduction as PanelProduction
 onready var _PanelTroops:=$HUD/PanelTroops as PanelTroops
 onready var _PanelAttack:=$HUD/PanelAttack as PanelAttack
+onready var _PanelEndGame:=$HUD/PanelEndGame as PanelEndGame
 var _human_city_selected:HumanCity
 var _npc_city_selected:NpcCity
 
@@ -23,17 +24,15 @@ func _ready()->void:
 #		_LevelContainer.add_child(_Level)
 	_Level.connect("sig_city_selected",self,"_sig_city_selected")
 	_Level.connect("sig_throw_attack",self,"_sig_throw_attack")
+	_Level.connect("sig_end_game",self,"_sig_end_game")
 	_sig_city_selected(_Level.get_human_city())
+	_PanelEndGame.connect("sig_closed",self,"sig_panel_endgame_closed")
 
 func _sig_pause_menu_closed(action:int,params:={})->void:
 	_Menu.hide()
 	match action:
 		GamePlayPauseMenu.Actions.Exit:
-			match Globals._game.mode:
-				Game.EMode.Campaing:
-					get_tree().change_scene("res://Scenes/CampaingScene.tscn")
-				_:
-					get_tree().change_scene("res://Scenes/IntroScene.tscn")
+			_exit_game()
 
 func _sig_menu_button_pressed()->void:
 	_Menu.show()
@@ -58,6 +57,11 @@ func _sig_city_action(action:int)->void:
 		TopBar.EActions.ATTACK_CITY_ACTION:
 			_PanelAttack.show()
 
+func sig_panel_endgame_closed(action:int,params:={})->void:
+	match action:
+		PanelEndGame.ACTION_CLOSE_PANEL:
+			_exit_game()
+
 func _sig_throw_attack(source_city:City,target_city:City,troops_obj:TroopsObj)->void:
 	var attack:TravelingTroops
 	if source_city is HumanCity:
@@ -66,3 +70,17 @@ func _sig_throw_attack(source_city:City,target_city:City,troops_obj:TroopsObj)->
 		attack=NPC_ATTACK_PREFAB.instance() as TravelingTroops
 	attack.init(source_city,target_city,troops_obj)
 	_LevelContainer.add_child(attack)
+
+func _sig_end_game(is_human_winner:bool)->void:
+	if is_human_winner:
+		_PanelEndGame.EndGameText="You win"
+	else:
+		_PanelEndGame.EndGameText="You loose"
+	_PanelEndGame.show()
+
+func _exit_game()->void:
+	match Globals._game.mode:
+		Game.EMode.Campaing:
+			get_tree().change_scene("res://Scenes/CampaingScene.tscn")
+		_:
+			get_tree().change_scene("res://Scenes/IntroScene.tscn")
