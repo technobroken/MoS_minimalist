@@ -17,7 +17,7 @@ func set_city(city:City)->void:
 			row.connect("sig_add_troop",self,"_sig_add_troop",[i,troop_keys[i]])
 
 func _ready()->void:
-	pass
+	$CenterContainer/VBoxContainer.rect_min_size.y=400
 
 func _sig_add_troop(row_index:int,troop_key:String)->void:
 	var is_added:=_city.try_add_troop(troop_key)

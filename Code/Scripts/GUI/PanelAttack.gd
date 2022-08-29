@@ -22,6 +22,7 @@ func set_cities(source_city:City,target_city:City)->void:
 		row.connect("sig_pressed",self,"_sig_row_selected")
 
 func _ready()->void:
+	$CenterContainer/VBoxContainer.rect_min_size.y=400
 	_row_seleted=null
 
 func _sig_row_selected(row_selected:PanelAttackTroopRow)->void:
@@ -39,6 +40,8 @@ func _on_PanelAttack_visibility_changed()->void:
 			var row:=_Rows.get_child(i) as PanelAttackTroopRow
 			var total:=_source_city_obj._troops.count_troop(row.TroopKey)
 			row.set_total(total)
+			row.reset_amount()
+			row.set_selected(false)
 
 func _on_ButtonPlus_pressed()->void:
 	if _row_seleted!=null:
