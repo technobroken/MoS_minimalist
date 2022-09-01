@@ -17,9 +17,12 @@ func set_cities(source_city:City,target_city:City)->void:
 	var troop_keys:=_source_city_obj.tribe_data["troops"] as Array
 	for i in troop_keys.size():
 		var row:=ROW_PREFAB.instance() as PanelAttackTroopRow
-		_Rows.add_child(row)
 		row.TroopKey=troop_keys[i]
+		_Rows.add_child(row)
 		row.connect("sig_pressed",self,"_sig_row_selected")
+
+func refresh()->void:
+	if visible:_refresh()
 
 func _ready()->void:
 	$CenterContainer/VBoxContainer.rect_min_size.y=400
@@ -34,14 +37,7 @@ func _sig_row_selected(row_selected:PanelAttackTroopRow)->void:
 				row.set_selected(false)
 
 func _on_PanelAttack_visibility_changed()->void:
-	if visible:
-		_row_seleted=null
-		for i in _Rows.get_child_count():
-			var row:=_Rows.get_child(i) as PanelAttackTroopRow
-			var total:=_source_city_obj._troops.count_troop(row.TroopKey)
-			row.set_total(total)
-			row.reset_amount()
-			row.set_selected(false)
+	if visible:_refresh()
 
 func _on_ButtonPlus_pressed()->void:
 	if _row_seleted!=null:
@@ -59,3 +55,12 @@ func _on_AttackButton_pressed()->void:
 		.close(PanelBase.ACTION_CLOSE_PANEL)
 		var troops:=TroopsObj.new(troop_amounts)
 		_source_city.attack_to(_target_city,troops)
+
+func _refresh()->void:
+	_row_seleted=null
+	for i in _Rows.get_child_count():
+		var row:=_Rows.get_child(i) as PanelAttackTroopRow
+		var total:=_source_city_obj._troops.count_troop(row.TroopKey)
+		row.set_total(total)
+		row.reset_amount()
+		row.set_selected(false)

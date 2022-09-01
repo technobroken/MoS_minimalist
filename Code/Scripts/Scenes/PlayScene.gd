@@ -1,8 +1,6 @@
 extends Node
 class_name PlayScene
 
-const HUMAN_ATTACK_PREFAB:=preload("res://Prefabs/HumanTravelingTroops.tscn")
-const NPC_ATTACK_PREFAB:=preload("res://Prefabs/NpcTravelingTroops.tscn")
 onready var _TopBar:=$HUD/TopBar as TopBar
 onready var _Menu:=$HUD/GamePlayPauseMenu as GamePlayPauseMenu
 onready var _LevelContainer:=$LevelContainer as Node
@@ -15,6 +13,7 @@ var _human_city_selected:HumanCity
 var _npc_city_selected:NpcCity
 
 func _ready()->void:
+	$AudioStreamPlayer.playing=true
 	_TopBar.connect("sig_menu_button_pressed",self,"_sig_menu_button_pressed")
 	_TopBar.connect("sig_city_action",self,"_sig_city_action")
 	_Menu.connect("sig_closed",self,"_sig_pause_menu_closed")
@@ -24,6 +23,7 @@ func _ready()->void:
 #		_LevelContainer.add_child(_Level)
 	_Level.connect("sig_city_selected",self,"_sig_city_selected")
 	_Level.connect("sig_throw_attack",self,"_sig_throw_attack")
+	_Level.connect("sig_attack_done",self,"_sig_attack_done")
 	_Level.connect("sig_end_game",self,"_sig_end_game")
 	_sig_city_selected(_Level.get_human_city())
 	_PanelEndGame.connect("sig_closed",self,"sig_panel_endgame_closed")
@@ -62,14 +62,9 @@ func sig_panel_endgame_closed(action:int,params:={})->void:
 		PanelEndGame.ACTION_CLOSE_PANEL:
 			_exit_game()
 
-func _sig_throw_attack(source_city:City,target_city:City,troops_obj:TroopsObj)->void:
-	var attack:TravelingTroops
-	if source_city is HumanCity:
-		attack=HUMAN_ATTACK_PREFAB.instance() as TravelingTroops
-	elif source_city is NpcCity:
-		attack=NPC_ATTACK_PREFAB.instance() as TravelingTroops
-	attack.init(source_city,target_city,troops_obj)
-	_LevelContainer.add_child(attack)
+func _sig_attack_done()->void:
+	_PanelTroops.refresh()
+	_PanelAttack.refresh()
 
 func _sig_end_game(is_human_winner:bool)->void:
 	if is_human_winner:

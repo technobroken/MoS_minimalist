@@ -37,11 +37,11 @@ margin_right = 450.0
 margin_bottom = 60.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
-custom_constants/margin_left = 6
+custom_constants/margin_left = 14
 custom_constants/margin_bottom = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Top/MarginContainer"]
-margin_left = 6.0
+margin_left = 14.0
 margin_top = 6.0
 margin_right = 444.0
 margin_bottom = 54.0
@@ -55,13 +55,13 @@ custom_fonts/font = ExtResource( 3 )
 [node name="Content" type="Label" parent="CenterContainer/VBoxContainer/Top/MarginContainer/HBoxContainer"]
 margin_left = 4.0
 margin_top = 17.0
-margin_right = 380.0
+margin_right = 372.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 
 [node name="CloseButton" type="TextureButton" parent="CenterContainer/VBoxContainer/Top/MarginContainer/HBoxContainer"]
-margin_left = 384.0
-margin_right = 438.0
+margin_left = 376.0
+margin_right = 430.0
 margin_bottom = 48.0
 texture_normal = ExtResource( 1 )
 

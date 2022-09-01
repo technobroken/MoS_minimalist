@@ -5,12 +5,20 @@ signal sig_pressed()
 signal sig_throw_attack()
 signal sig_defeated()
 const STAYING_TROOP_PREFAB:=preload("res://Prefabs/StayingTroops.tscn")
+export var Id:int
+export var Ally:PoolIntArray
 export var TribeKey:String
 onready var _Troops:=$Troops as Node2D
 onready var _Life:=$Life as Label
+var _active:bool
 var _life:int=100
 var _city_obj:CityObj
 var _time_count:float
+
+func is_ally(city:City)->bool:
+	for id in Ally:
+		if city.Id==id: return true
+	return false
 
 func try_add_troop(troop_key:String)->bool:
 	var troop_data:=Data.TROOPS[troop_key] as Dictionary
@@ -48,15 +56,17 @@ func apply_city_damage(attack_points:int)->void:
 		emit_signal("sig_defeated",self)
 
 func _ready()->void:
+	_active=true
 	_Life.text=str(_life)
 	_time_count=0
 
 func _process(delta:float)->void:
-	_time_count-=delta
-	if _time_count<0:
-		_city_obj.produce_materials()
-		_time_count+=1
-	$DebugTroops.text=str(_city_obj._troops)
+	if _active:
+		_time_count-=delta
+		if _time_count<0:
+			_city_obj.produce_materials()
+			_time_count+=1
+		$DebugTroops.text=str(_city_obj._troops)
 
 func _on_Area2D_input_event(viewport:Node,event:InputEvent,shape_idx:int)->void:
 	if event is InputEventMouseButton:

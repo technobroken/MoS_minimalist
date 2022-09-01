@@ -139,7 +139,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/GUI/PanelTroops.gd"
 }, {
-"base": "HBoxContainer",
+"base": "VBoxContainer",
 "class": "PanelTroopsRow",
 "language": "GDScript",
 "path": "res://Scripts/GUI/PanelTroopsRow.gd"

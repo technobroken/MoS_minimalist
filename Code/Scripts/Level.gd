@@ -3,9 +3,12 @@ class_name Level
 
 signal sig_city_selected()
 signal sig_throw_attack()
+signal sig_attack_done()
 signal sig_end_game()
 const HUMAN_CITY_PREFAB:=preload("res://Prefabs/HumanCity.tscn")
 const NPC_CITY_PREFAB:=preload("res://Prefabs/NpcCity.tscn")
+const HUMAN_ATTACK_PREFAB:=preload("res://Prefabs/HumanTravelingTroops.tscn")
+const NPC_ATTACK_PREFAB:=preload("res://Prefabs/NpcTravelingTroops.tscn")
 export var HumanCityIndex:int
 export var NpcCityIndex:int
 onready var _CitiesContainer:=$Cities as Node
@@ -31,9 +34,22 @@ func _sig_city_selected(city:City)->void:
 	emit_signal("sig_city_selected",city)
 
 func _sig_throw_attack(source_city:City,target_city:City,troops_obj:TroopsObj)->void:
-	emit_signal("sig_throw_attack",source_city,target_city,troops_obj)
+	var attack:TravelingTroops
+	if source_city is HumanCity:
+		attack=HUMAN_ATTACK_PREFAB.instance() as TravelingTroops
+	elif source_city is NpcCity:
+		attack=NPC_ATTACK_PREFAB.instance() as TravelingTroops
+	attack.init(source_city,target_city,troops_obj)
+	add_child(attack)
+	attack.connect("sig_attack_done",self,"_sig_attack_done")
+
+func _sig_attack_done()->void:
+	emit_signal("sig_attack_done")
 
 func _sig_defeated(city:City)->void:
+	for i in _CitiesContainer.get_child_count():
+		var city_i:=_CitiesContainer.get_child(i) as City
+		city_i._active=false
 	var is_human_winner:=city!=_human_city
 	emit_signal("sig_end_game",is_human_winner)
 

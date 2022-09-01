@@ -12,9 +12,12 @@ func set_city(city:City)->void:
 		var troop_keys:=_city._city_obj.tribe_data["troops"] as Array
 		for i in troop_keys.size():
 			var row:=PANEL_TROOP_ROW_PREFAB.instance() as PanelTroopsRow
-			_TroopRows.add_child(row)
 			row.TroopKey=troop_keys[i]
+			_TroopRows.add_child(row)
 			row.connect("sig_add_troop",self,"_sig_add_troop",[i,troop_keys[i]])
+
+func refresh()->void:
+	if visible:_refresh()
 
 func _ready()->void:
 	$CenterContainer/VBoxContainer.rect_min_size.y=400
@@ -27,7 +30,10 @@ func _sig_add_troop(row_index:int,troop_key:String)->void:
 
 func _on_PanelTroops_visibility_changed()->void:
 	if visible:
-		for i in _TroopRows.get_child_count():
-			var row:=_TroopRows.get_child(i) as PanelTroopsRow
-			var amount:=_city._city_obj._troops.count_troop(row.TroopKey)
-			row.set_amount(amount)
+		_refresh()
+
+func _refresh()->void:
+	for i in _TroopRows.get_child_count():
+		var row:=_TroopRows.get_child(i) as PanelTroopsRow
+		var amount:=_city._city_obj._troops.count_troop(row.TroopKey)
+		row.set_amount(amount)

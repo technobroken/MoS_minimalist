@@ -1,6 +1,7 @@
 extends Area2D
 class_name TravelingTroops
 
+signal sig_attack_done()
 enum EState{TRAVELING,IN_BATTLE}
 var _speed:float=300
 var _direction:Vector2
@@ -27,5 +28,6 @@ func _on_TravelingTroops_area_entered(area:Area2D)->void:
 	_direction=Vector2.ZERO
 	CombatSimulator.simulate_combat(_attack_troops_obj,city)
 	_source_city._city_obj._troops.apply_altas(_attack_troops_obj)
+	emit_signal("sig_attack_done")
 	yield(get_tree().create_timer(.5),"timeout")
 	queue_free()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Fonts/TopBarResourceFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Assets/Textures/GUI/MenuIcon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Textures/GUI/Stage.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/GUI/PanelAttackTroopRow.gd" type="Script" id=3]
 [ext_resource path="res://Prefabs/GUI/PanelAttackButtonGroup.tres" type="ButtonGroup" id=4]
+[ext_resource path="res://Assets/Textures/Tribe1Troop1.png" type="Texture" id=5]
 
 [node name="PanelAttackTroopRow" type="ColorRect"]
 margin_bottom = 64.0
@@ -34,6 +35,13 @@ size_flags_vertical = 4
 toggle_mode = true
 group = ExtResource( 4 )
 texture_normal = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/TextureButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 5 )
+stretch_mode = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 margin_left = 64.0

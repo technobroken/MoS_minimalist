@@ -7,6 +7,7 @@ const NORMAL_COLOR:=Color('#00000000')
 export var TroopKey:String
 onready var _Total:=$MarginContainer/HBoxContainer/VBoxContainer/Total as Label
 onready var _Amount:=$MarginContainer/HBoxContainer/VBoxContainer/Amount as Label
+onready var _TroopTexture:=$MarginContainer/HBoxContainer/TextureButton/TextureRect as TextureRect
 var pressed:bool
 var _total:int
 var _amount:int
@@ -40,6 +41,7 @@ func set_selected(flag:bool)->void:
 	color=SELECTED_COLOR if pressed else NORMAL_COLOR
 
 func _ready()->void:
+	_TroopTexture.texture=Data.TROOPS[TroopKey]["texture"]
 	color=NORMAL_COLOR
 	pressed=false
 	_total=0
