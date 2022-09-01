@@ -6,10 +6,18 @@
 [node name="PanelTroops" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
+[node name="Title" parent="CenterContainer/VBoxContainer/Top/MarginContainer/HBoxContainer" index="0"]
+margin_right = 73.0
+text = "Ejercito"
+
+[node name="Content" parent="CenterContainer/VBoxContainer/Top/MarginContainer/HBoxContainer" index="1"]
+margin_left = 77.0
+
 [node name="TroopRows" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Center/CenterContainer" index="0"]
 margin_left = 225.0
 margin_top = 268.0
 margin_right = 225.0
 margin_bottom = 268.0
+custom_constants/separation = 10
 
 [connection signal="visibility_changed" from="." to="." method="_on_PanelTroops_visibility_changed"]

@@ -11,16 +11,17 @@ func _ready()->void:
 	_city_obj=NpcCityObj.new(Data.TRIBES[TribeKey])
 
 func _on_Timer_timeout()->void:
-	if _check_condition_for_defense():
-		.try_add_troop("T1")
-	else:#elif _check_condition_for_ofense():
-		.try_add_troop("T2")
-	if _check_condition_for_attack():
-		var troop_amounts:={}
-		for troop_key in _city_obj._troops.get_troop_keys():
-			troop_amounts[troop_key]=_city_obj._troops.count_troop(troop_key)
-		var troops:=TroopsObj.new(troop_amounts)
-		.attack_to(_target_city,troops)
+	if _active:
+		if _check_condition_for_defense():
+			.try_add_troop("T1")
+		else:#elif _check_condition_for_ofense():
+			.try_add_troop("T2")
+		if _check_condition_for_attack():
+			var troop_amounts:={}
+			for troop_key in _city_obj._troops.get_troop_keys():
+				troop_amounts[troop_key]=_city_obj._troops.count_troop(troop_key)
+			var troops:=TroopsObj.new(troop_amounts)
+			.attack_to(_target_city,troops)
 
 func _check_condition_for_defense()->bool:
 	var defense:=_city_obj._troops.get_defense_points()

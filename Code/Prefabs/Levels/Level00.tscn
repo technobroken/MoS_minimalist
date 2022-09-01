@@ -879,4 +879,5 @@ TribeKey = "T1"
 
 [node name="NpcCity" parent="Cities" index="1" instance=ExtResource( 2 )]
 position = Vector2( 96, 288 )
+Id = 1
 TribeKey = "T1"

@@ -14,6 +14,13 @@ margin_top = 200.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 450, 400 )
 
+[node name="Title" parent="CenterContainer/VBoxContainer/Top/MarginContainer/HBoxContainer" index="0"]
+margin_right = 68.0
+text = "Ataque"
+
+[node name="Content" parent="CenterContainer/VBoxContainer/Top/MarginContainer/HBoxContainer" index="1"]
+margin_left = 72.0
+
 [node name="Center" parent="CenterContainer/VBoxContainer" index="1"]
 margin_bottom = 400.0
 
