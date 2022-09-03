@@ -11,8 +11,6 @@ const LEVEL:={
 	]
 }
 var _game:Game
-var ev_listeners:={}
 
 func _ready()->void:
 	_game=Game.new()
-	ev_listeners["EVENT_TROOPS_IN_CITY"]=EvListener.new()

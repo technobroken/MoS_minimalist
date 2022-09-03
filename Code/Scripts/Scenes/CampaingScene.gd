@@ -15,7 +15,7 @@ func _ready()->void:
 func _stage_pressed(stage_index:int)->void:
 	if stage_index<LEVELS.size():
 		Globals._game.level_path=LEVELS[stage_index]
-	get_tree().change_scene("res://Scenes/PlayScene.tscn")
+	SceneTransitor.change_scene("res://Scenes/PlayScene.tscn")
 
 func _on_ExitButton_pressed()->void:
-	get_tree().change_scene("res://Scenes/IntroScene.tscn")
+	SceneTransitor.change_scene("res://Scenes/IntroScene.tscn")
