@@ -45,11 +45,6 @@ _global_script_classes=[ {
 "path": "res://Scripts/Data.gd"
 }, {
 "base": "Reference",
-"class": "EvListener",
-"language": "GDScript",
-"path": "res://Scripts/EvListener.gd"
-}, {
-"base": "Reference",
 "class": "Game",
 "language": "GDScript",
 "path": "res://Scripts/Game.gd"
@@ -202,7 +197,6 @@ _global_script_class_icons={
 "CityObj": "",
 "CombatSimulator": "",
 "Data": "",
-"EvListener": "",
 "Game": "",
 "GamePlayPauseMenu": "",
 "HumanCity": "",
