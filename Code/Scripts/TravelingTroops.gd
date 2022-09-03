@@ -3,7 +3,8 @@ class_name TravelingTroops
 
 signal sig_attack_done()
 enum EState{TRAVELING,IN_BATTLE}
-var _speed:float=300
+export var Speed:int=300
+var _speed:float
 var _direction:Vector2
 var _source_city:City
 var _attack_troops_obj:TroopsObj
@@ -17,7 +18,7 @@ func init(source:City,target:City,attack_troops_obj:TroopsObj)->void:
 	_state=EState.TRAVELING
 
 func _ready()->void:
-	pass # Replace with function body.
+	_speed=Speed
 
 func _process(delta:float)->void:
 	position+=_direction*_speed*delta

@@ -8,6 +8,7 @@ onready var _Level:=$LevelContainer/Level00 as Level
 onready var _PanelProduction:=$HUD/PanelProduction as PanelProduction
 onready var _PanelTroops:=$HUD/PanelTroops as PanelTroops
 onready var _PanelAttack:=$HUD/PanelAttack as PanelAttack
+onready var _PanelReports:=$HUD/PanelReports as PanelBase
 onready var _PanelEndGame:=$HUD/PanelEndGame as PanelEndGame
 var _human_city_selected:HumanCity
 var _npc_city_selected:NpcCity
@@ -56,6 +57,8 @@ func _sig_city_action(action:int)->void:
 			_PanelTroops.show()
 		TopBar.EActions.ATTACK_CITY_ACTION:
 			_PanelAttack.show()
+		TopBar.EActions.REPORTS_ACTION:
+			_PanelReports.show()
 
 func sig_panel_endgame_closed(action:int,params:={})->void:
 	match action:
