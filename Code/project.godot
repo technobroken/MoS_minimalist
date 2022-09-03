@@ -64,7 +64,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Objects/HumanCityObj.gd"
 }, {
-"base": "CanvasLayer",
+"base": "Node",
 "class": "IntroScene",
 "language": "GDScript",
 "path": "res://Scripts/Scenes/IntroScene.gd"
@@ -239,6 +239,7 @@ config/icon="res://icon.png"
 NodeTools="*res://Scripts/Globals/NodeTools.gd"
 Enums="*res://Scripts/Globals/Enums.gd"
 Globals="*res://Scripts/Globals/Globals.gd"
+SceneTransitor="*res://TOOLS/SceneTransitor/SceneTransitor.tscn"
 
 [display]
 
