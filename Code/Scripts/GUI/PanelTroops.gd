@@ -9,7 +9,7 @@ func set_city(city:City)->void:
 	if _city!=city:
 		_city=city
 		NodeTools.free_children(_TroopRows)
-		var troop_keys:=_city._city_obj.tribe_data["troops"] as Array
+		var troop_keys:=Data.TRIBES[_city.TribeKey]["troops"] as Array
 		for i in troop_keys.size():
 			var row:=PANEL_TROOP_ROW_PREFAB.instance() as PanelTroopsRow
 			row.TroopKey=troop_keys[i]

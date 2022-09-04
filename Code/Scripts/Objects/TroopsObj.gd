@@ -3,6 +3,9 @@ class_name TroopsObj
 
 var _amounts:Dictionary#(troop_key,amount)
 
+func has_troop(troop_key:String)->bool:
+	return _amounts.has(troop_key)
+
 func count_troop(troop_key:String)->int:
 	return int(_amounts[troop_key])
 

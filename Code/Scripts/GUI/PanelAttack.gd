@@ -14,7 +14,7 @@ func set_cities(source_city:City,target_city:City)->void:
 	_target_city=target_city
 	_source_city_obj=source_city._city_obj
 	_target_city_obj=target_city._city_obj
-	var troop_keys:=_source_city_obj.tribe_data["troops"] as Array
+	var troop_keys:=Data.TRIBES[source_city.TribeKey]["troops"] as Array
 	for i in troop_keys.size():
 		var row:=ROW_PREFAB.instance() as PanelAttackTroopRow
 		row.TroopKey=troop_keys[i]
@@ -41,7 +41,6 @@ func _on_PanelAttack_visibility_changed()->void:
 
 func _on_ButtonPlus_pressed()->void:
 	if _row_seleted!=null:
-		var total:=_row_seleted.get_total()
 		_row_seleted.inc_amount()
 
 func _on_AttackButton_pressed()->void:

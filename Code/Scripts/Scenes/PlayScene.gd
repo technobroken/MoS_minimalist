@@ -8,6 +8,7 @@ onready var _Level:=$LevelContainer/Level00 as Level
 onready var _PanelProduction:=$HUD/PanelProduction as PanelProduction
 onready var _PanelTroops:=$HUD/PanelTroops as PanelTroops
 onready var _PanelAttack:=$HUD/PanelAttack as PanelAttack
+onready var _PanelReports:=$HUD/PanelReports as PanelReports
 onready var _PanelEndGame:=$HUD/PanelEndGame as PanelEndGame
 var _human_city_selected:HumanCity
 var _npc_city_selected:NpcCity
@@ -25,8 +26,8 @@ func _ready()->void:
 	_Level.connect("sig_throw_attack",self,"_sig_throw_attack")
 	_Level.connect("sig_attack_done",self,"_sig_attack_done")
 	_Level.connect("sig_end_game",self,"_sig_end_game")
-	_sig_city_selected(_Level.get_human_city())
 	_PanelEndGame.connect("sig_closed",self,"sig_panel_endgame_closed")
+	_sig_city_selected(_Level.get_human_city())
 
 func _sig_pause_menu_closed(action:int,params:={})->void:
 	_Menu.hide()
@@ -56,15 +57,18 @@ func _sig_city_action(action:int)->void:
 			_PanelTroops.show()
 		TopBar.EActions.ATTACK_CITY_ACTION:
 			_PanelAttack.show()
+		TopBar.EActions.REPORTS_ACTION:
+			_PanelReports.show()
 
 func sig_panel_endgame_closed(action:int,params:={})->void:
 	match action:
 		PanelEndGame.ACTION_CLOSE_PANEL:
 			_exit_game()
 
-func _sig_attack_done()->void:
+func _sig_attack_done(attack_report:AttackReportObj)->void:
 	_PanelTroops.refresh()
 	_PanelAttack.refresh()
+	_PanelReports.add_report(attack_report)
 
 func _sig_end_game(is_human_winner:bool)->void:
 	if is_human_winner:

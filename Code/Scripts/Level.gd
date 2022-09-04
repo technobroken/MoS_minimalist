@@ -43,8 +43,8 @@ func _sig_throw_attack(source_city:City,target_city:City,troops_obj:TroopsObj)->
 	add_child(attack)
 	attack.connect("sig_attack_done",self,"_sig_attack_done")
 
-func _sig_attack_done()->void:
-	emit_signal("sig_attack_done")
+func _sig_attack_done(attack_report:AttackReportObj)->void:
+	emit_signal("sig_attack_done",attack_report)
 
 func _sig_defeated(city:City)->void:
 	for i in _CitiesContainer.get_child_count():
