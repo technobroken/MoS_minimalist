@@ -50,7 +50,7 @@ func apply_troops_damage(factor:float)->void:
 	_fill_troops_node(_city_obj._troops)
 
 func apply_city_damage(attack_points:int)->void:
-	_life=max(0,_life-attack_points/10)
+	_life=max(0,int(_life-attack_points/10))
 	_Life.text=str(_life)
 	if _life==0:
 		emit_signal("sig_defeated",self)
@@ -91,9 +91,9 @@ func _fill_troops_node(troops_obj:TroopsObj)->void:
 func _reposition_troops()->void:
 	var n:=_Troops.get_child_count()
 	if n>0:
-		var step:=360/n
+		var step:=int(360/n)
 		var value:=0
-		var vector:=Vector2(10 if n>1 else 0,0)
+		var vector:=Vector2(20 if n>1 else 0,0)
 		for i in range(n):
 			var child:=_Troops.get_child(i) as Node2D
 			child.position=vector.rotated(deg2rad(value))

@@ -1,8 +1,11 @@
 extends Reference
 class_name CombatSimulator
 
-static func simulate_combat(attack_troops_obj:TroopsObj,target_city:City)->void:
+static func simulate_combat(attack_troops_obj:TroopsObj,target_city:City)->AttackReportObj:
+	var attack_report:=AttackReportObj.new()
 	var defense_troops_obj:=target_city._city_obj._troops
+	attack_report.ofensive_before=TroopsObj.new(attack_troops_obj._amounts.duplicate(true))
+	attack_report.defense_before=TroopsObj.new(defense_troops_obj._amounts.duplicate(true))
 	#calcular ofensiva
 	var attack:=attack_troops_obj.get_attack_points()
 	#calcular defensa
@@ -23,3 +26,6 @@ static func simulate_combat(attack_troops_obj:TroopsObj,target_city:City)->void:
 		#calular las bajas en la defensa
 		var factor:=0.0 if defense==0 else abs(diference)/defense
 		target_city.apply_troops_damage(factor)
+	attack_report.ofensive_after=TroopsObj.new(attack_troops_obj._amounts.duplicate(true))
+	attack_report.defense_after=TroopsObj.new(defense_troops_obj._amounts.duplicate(true))
+	return attack_report

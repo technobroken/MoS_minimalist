@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Prefabs/GUI/PanelBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Prefabs/GUI/PanelReportsRow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/GUI/PanelReports.gd" type="Script" id=3]
 
 [node name="PanelReports" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
 
 [node name="Title" parent="CenterContainer/VBoxContainer/Top/MarginContainer/HBoxContainer" index="0"]
 margin_right = 198.0
@@ -12,25 +13,22 @@ text = "Reportes de ataques"
 [node name="Content" parent="CenterContainer/VBoxContainer/Top/MarginContainer/HBoxContainer" index="1"]
 margin_left = 202.0
 
+[node name="CenterContainer" parent="CenterContainer/VBoxContainer/Center" index="0"]
+visible = false
+
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/VBoxContainer/Center" index="1"]
 margin_right = 450.0
 margin_bottom = 536.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Center/ScrollContainer" index="0"]
-margin_right = 200.0
-margin_bottom = 608.0
-rect_min_size = Vector2( 0, 400 )
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer/Center/ScrollContainer" index="0"]
+margin_right = 450.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
 
-[node name="PanelReportsRow" parent="CenterContainer/VBoxContainer/Center/ScrollContainer/VBoxContainer" index="0" instance=ExtResource( 2 )]
-margin_right = 200.0
-margin_bottom = 200.0
+[node name="Reports" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Center/ScrollContainer/MarginContainer" index="0"]
+margin_left = 20.0
+margin_right = 430.0
+custom_constants/separation = 6
 
-[node name="PanelReportsRow2" parent="CenterContainer/VBoxContainer/Center/ScrollContainer/VBoxContainer" index="1" instance=ExtResource( 2 )]
-margin_top = 204.0
-margin_right = 200.0
-margin_bottom = 404.0
-
-[node name="PanelReportsRow3" parent="CenterContainer/VBoxContainer/Center/ScrollContainer/VBoxContainer" index="2" instance=ExtResource( 2 )]
-margin_top = 408.0
-margin_right = 200.0
-margin_bottom = 608.0
+[connection signal="visibility_changed" from="." to="." method="_on_PanelReports_visibility_changed"]

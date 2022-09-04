@@ -1,12 +1,14 @@
 extends Reference
 class_name AttackReportObj
 
-var attack:TroopsObj
-var defense:TroopsObj
+var ofensive_before:TroopsObj
+var defense_before:TroopsObj
+var ofensive_after:TroopsObj
+var defense_after:TroopsObj
 var source_city:CityObj
 var target_city:CityObj
-var attack_result:TroopsObj
-var defense_result:TroopsObj
+var ofensive_tribe_key:String
+var defense_tribe_key:String
 
 func _init()->void:
 	pass # Replace with function body.
