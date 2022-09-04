@@ -30,17 +30,16 @@ margin_top = 6.0
 margin_right = 1274.0
 margin_bottom = 54.0
 size_flags_horizontal = 3
-custom_constants/separation = 40
+custom_constants/separation = 10
 
 [node name="RawMaterials" parent="ColorRect/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
 margin_right = 586.0
 size_flags_horizontal = 1
 
 [node name="CityActions" type="HBoxContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
-margin_left = 626.0
-margin_right = 1174.0
+margin_left = 596.0
+margin_right = 884.0
 margin_bottom = 48.0
-size_flags_horizontal = 7
 
 [node name="ProductionButton" type="TextureButton" parent="ColorRect/MarginContainer/HBoxContainer/CityActions"]
 margin_right = 142.0
@@ -71,10 +70,29 @@ text = "Ejercito"
 align = 1
 valign = 1
 
+[node name="BattleReports" type="HBoxContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
+margin_left = 894.0
+margin_right = 1044.0
+margin_bottom = 48.0
+size_flags_horizontal = 7
+
+[node name="ReportsButton" type="TextureButton" parent="ColorRect/MarginContainer/HBoxContainer/BattleReports"]
+margin_right = 142.0
+margin_bottom = 48.0
+texture_normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/HBoxContainer/BattleReports/ReportsButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.301961, 0.301961, 0.301961, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "Reportes"
+align = 1
+valign = 1
+
 [node name="EnemyActions" type="HBoxContainer" parent="ColorRect/MarginContainer/HBoxContainer"]
-visible = false
-margin_left = 954.0
-margin_right = 1174.0
+margin_left = 1054.0
+margin_right = 1204.0
 margin_bottom = 48.0
 size_flags_horizontal = 7
 
@@ -101,5 +119,6 @@ texture_normal = ExtResource( 1 )
 
 [connection signal="pressed" from="ColorRect/MarginContainer/HBoxContainer/CityActions/ProductionButton" to="." method="_on_ProductionButton_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/HBoxContainer/CityActions/TroopsButton" to="." method="_on_TroopsButton_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/HBoxContainer/BattleReports/ReportsButton" to="." method="_on_ReportsButton_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/HBoxContainer/EnemyActions/AttackButton" to="." method="_on_AttackButton_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/HBoxContainer/MenuButton" to="." method="_on_MenuButton_pressed"]

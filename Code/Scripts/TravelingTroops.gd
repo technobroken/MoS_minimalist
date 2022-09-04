@@ -3,7 +3,8 @@ class_name TravelingTroops
 
 signal sig_attack_done()
 enum EState{TRAVELING,IN_BATTLE}
-var _speed:float=300
+export var Speed:int=50
+var _speed:float
 var _direction:Vector2
 var _source_city:City
 var _attack_troops_obj:TroopsObj
@@ -17,7 +18,7 @@ func init(source:City,target:City,attack_troops_obj:TroopsObj)->void:
 	_state=EState.TRAVELING
 
 func _ready()->void:
-	pass # Replace with function body.
+	_speed=Speed
 
 func _process(delta:float)->void:
 	position+=_direction*_speed*delta
@@ -26,8 +27,12 @@ func _on_TravelingTroops_area_entered(area:Area2D)->void:
 	var city:=area as City
 	_state=EState.IN_BATTLE
 	_direction=Vector2.ZERO
-	CombatSimulator.simulate_combat(_attack_troops_obj,city)
+	var attack_report:=CombatSimulator.simulate_combat(_attack_troops_obj,city)
+	attack_report.source_city=_source_city._city_obj
+	attack_report.target_city=city._city_obj
+	attack_report.ofensive_tribe_key=_source_city.TribeKey
+	attack_report.defense_tribe_key=city.TribeKey
 	_source_city._city_obj._troops.apply_altas(_attack_troops_obj)
-	emit_signal("sig_attack_done")
+	emit_signal("sig_attack_done",attack_report)
 	yield(get_tree().create_timer(.5),"timeout")
 	queue_free()
